@@ -58,7 +58,7 @@ int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
         const struct sockaddr_in *addr_in = (const struct sockaddr_in *)addr;
         askport = ntohs(addr_in->sin_port);
         inet_ntop(AF_INET, &addr_in->sin_addr, addr_str, sizeof(addr_str));
-    } else if (family == AF_INET6) {
+    } else {
         const struct sockaddr_in6 *addr_in6 = (const struct sockaddr_in6 *)addr;
         askport = ntohs(addr_in6->sin6_port);
         inet_ntop(AF_INET6, &addr_in6->sin6_addr, addr_str, sizeof(addr_str));
@@ -105,7 +105,7 @@ int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
         struct sockaddr_in *addr_in_tmp = (struct sockaddr_in *)&addr_tmp;
         addr_in_tmp->sin_addr.s_addr = htonl(INADDR_LOOPBACK);
         addr_in_tmp->sin_port = htons(newport);
-    } else if (family == AF_INET6) {
+    } else {
         struct sockaddr_in6 *addr_in6_tmp = (struct sockaddr_in6 *)&addr_tmp;
         static const struct in6_addr v4_loopback_mapped = { // ::ffff:127.0.0.1
             .s6_addr = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xff, 0xff, 127, 0, 0, 1}
